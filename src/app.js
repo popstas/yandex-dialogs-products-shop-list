@@ -30,25 +30,14 @@ class YandexDialogsWhatis {
 
     // изменяют ctx во время запроса
     alice.use(middlewares.store());
-    alice.use(middlewares.corrector());
     alice.use(middlewares.cleaner());
     alice.use(middlewares.counter());
 
     alice.use(middlewares.confirm());
-    // alice.use(middlewares.auth());
 
     alice.use(entities.shop());
 
     await utils.initMorph();
-
-    // сцена запомни ...
-    const rememberMasterStage = new Stage();
-    const rememberMasterScene = new Scene('rememberMaster');
-    useCommand(rememberMasterScene, commands.core.cancel);
-    useCommand(rememberMasterScene, commands.items.remember);
-    rememberMasterScene.any(commands.items.rememberMaster.rememberMasterProcess);
-    rememberMasterStage.addScene(rememberMasterScene);
-    alice.use(rememberMasterStage.getMiddleware());
 
     // подключение всех команд
     commands.utils.useCommands(alice, commands.core);
@@ -72,18 +61,8 @@ class YandexDialogsWhatis {
     app.post(this.config.API_ENDPOINT, async (req, res) => {
       const jsonAnswer = await alice.handleRequest(req.body);
       res.json(jsonAnswer);
-      // const handleResponseCallback = response => res.send(response);
-      // const replyMessage = await alice.handleRequest(req.body, handleResponseCallback);
     });
     return app;
-  }
-
-  // эту функцию можно ставить ендпойнтом на aws lambda
-  handlerLambda(event, context, callback) {
-    const body = JSON.parse(event.body);
-    alice.handleRequest(body, res => {
-      callback(null, res);
-    });
   }
 
   listen(port) {

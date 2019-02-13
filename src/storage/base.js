@@ -14,13 +14,9 @@ class BaseDriver {
     }
   }
 
-  getData(userData) {}
-
   getState(userData) {}
 
   clearData(userData) {}
-
-  fillDemoData(userData) {}
 
   storeAnswer(userData, question, answer) {}
 }

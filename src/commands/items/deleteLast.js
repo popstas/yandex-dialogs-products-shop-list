@@ -1,5 +1,3 @@
-const deleteQuestion = require('./deleteQuestion');
-
 module.exports = {
   intent: 'deleteLast',
   matcher: /^(забудь|удали(ть)?|убрать|убери|сотри|стереть|отмени(ть)?) ?(последнее|последний|последние|последнюю запись|это)?$/i,
@@ -29,11 +27,6 @@ module.exports = {
       );
     }
 
-    if (!ctx.user.state.lastAddedItem) {
-      ctx.chatbase.setNotHandled();
-      return ctx.reply('Я ничего не запоминала в последнее время...');
-    }
-    const question = ctx.user.state.lastAddedItem.questions[0];
-    return deleteQuestion.processDelete(ctx, question);
+    return ctx.reply('Я ничего не запоминала в последнее время...');
   }
 };

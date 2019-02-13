@@ -3,65 +3,8 @@ const storage = require('./storage');
 const { Stage } = require('yandex-dialogs-sdk');
 // здесь мелкие обработки текста
 
-const verbs = [
-  'находится',
-  'находятся',
-  'растет',
-  'лежит',
-  'лежат',
-  'стоит',
-  'стоят',
-  'висит',
-  'висят',
-  'налита',
-  'налито',
-  'будет',
-  'будут',
-  'было',
-  'был',
-  'была',
-  'надо купить',
-  'надо',
-  'купить'
-];
-module.exports.verbs = verbs;
-module.exports.rememberRegex = new RegExp('(.*) (' + verbs.join('|') + ') (.*)');
-
 module.exports.initMorph = async () => {
   await new Promise(resolve => Az.Morph.init(resolve));
-};
-
-// разбивает строку на 3 части, с глаголом посередине
-module.exports.splitByVerb = msg => {
-  if (msg === '') return false;
-  const words = msg.split(' ');
-  const posts = getMsgPosts(msg);
-  const countVerbs = posts.filter(post => post === 'VERB').length;
-
-  // может быть только один глагол и только посередине,
-  // но больше 1 глагола разрешено, чтобы не было исключений
-  if (countVerbs == 0) return false;
-  const verbIndex = posts.indexOf('VERB');
-  if (verbIndex === 0 || verbIndex == posts.length - 1) return false;
-
-  return {
-    question: words.slice(0, verbIndex).join(' '),
-    answer: words.slice(verbIndex + 1).join(' '),
-    verb: words[verbIndex]
-  };
-};
-
-// разворачивает фразу, если часть "где" оказалась справа
-// определяется по наличию предлога или наречия, либо по числу во второй части
-module.exports.fixReversedRemember = obj => {
-  const posts = getMsgPosts(obj.answer);
-  if (posts.indexOf('PREP') != -1 || posts.indexOf('ADVB') != -1 || obj.answer.match(/[0-9]/))
-    return {
-      question: obj.answer,
-      verb: obj.verb,
-      answer: obj.question
-    };
-  return obj;
 };
 
 // возвращает массив частей речи фразы
@@ -80,53 +23,3 @@ const getMsgPosts = msg => {
   return posts;
 };
 module.exports.getMsgPosts = getMsgPosts;
-
-// находит глагол в команде
-module.exports.getVerb = message => {
-  return (
-    verbs.find(verb => {
-      const reg = new RegExp(`${verb} `);
-      return message.match(reg);
-    }) || false
-  );
-};
-
-// убирает глагол из начала в вопросе
-const cleanVerb = msg => {
-  const words = msg.split(' ');
-  const posts = getMsgPosts(msg);
-  if (!posts) return msg;
-  return words
-    .filter((word, index) => {
-      return posts[index] !== 'VERB';
-    })
-    .join(' ');
-};
-
-// убирает глагол из начала в вопросе
-// const cleanVerb = msg => {
-//   verbs.forEach(verb => {
-//     msg = msg.replace(new RegExp(`^${verb} `), '');
-//     msg = msg.replace(new RegExp(` ${verb}$`), '');
-//   });
-//   return msg;
-// };
-// module.exports.cleanVerb = cleanVerb;
-
-// убирает лишнее в вопросе
-module.exports.cleanQuestion = message => {
-  let msg = message.replace(/^(что|кто) /i, '').replace(/^(где|когда|в чем) /i, '');
-  return cleanVerb(msg);
-};
-
-// очищает состояние заполнение ответа на вопрос
-module.exports.resetState = async ctx => {
-  ctx.user.state.stage = 'STAGE_IDLE';
-  ctx.user.state.question = '';
-  ctx.user.state.answer = '';
-  // ctx.leave();
-  // ctx.session.set('__currentScene', '__mainScene');
-  ctx.session.set(Stage.CURRENT_SCENE_SESSION_KEY, Stage.DEFAULT_SCENE_NAME);
-  await storage.setState(ctx.userData, ctx.user.state);
-  return ctx;
-};

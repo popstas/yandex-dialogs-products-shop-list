@@ -14,7 +14,6 @@ const clearDataAll = async ctx => {
   ctx.chatbase.setIntent('clearDataAll');
   ctx.logMessage(`> ${ctx.message} (clearDataAll)`);
 
-  await storage.clearData(ctx.userData);
   [
     'answer',
     'deleteFails',
@@ -32,11 +31,5 @@ const clearDataAll = async ctx => {
   ].forEach(name => {
     delete ctx.user.state[name];
   });
-  /* ctx.user.state.products = [];
-  delete(ctx.user.state.visitor);
-  delete(ctx.user.state.visit);
-  ctx.user.state.tourStep = '';
-  ctx.user.state.webhooks = []; */
-  ctx = await utils.resetState(ctx);
   return ctx.reply('Вообще всё забыла...');
 };

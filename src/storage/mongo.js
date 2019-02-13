@@ -3,7 +3,6 @@
 const BaseDriver = require('./base');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
-const demoData = require('../demoData');
 
 class MongoDriver extends BaseDriver {
   constructor(url, name, user, password) {
@@ -74,10 +73,6 @@ class MongoDriver extends BaseDriver {
     });
   }
 
-  async getData(userData) {
-    return await userData.data.find({}).toArray();
-  }
-
   async getState(userData) {
     let state = await userData.state.find({ name: 'state' }).toArray();
     state = state.length > 0 ? state[0].state : {};
@@ -114,11 +109,6 @@ class MongoDriver extends BaseDriver {
 
   async clearState(userData) {
     await userData.state.deleteMany({});
-  }
-
-  async fillDemoData(userData) {
-    await this.clearData(userData);
-    await userData.data.insert(demoData);
   }
 
   async storeAnswer(userData, question, answer) {

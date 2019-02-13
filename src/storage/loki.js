@@ -2,7 +2,6 @@
 
 const BaseDriver = require('./base');
 const loki = require('lokijs');
-const demoData = require('../demoData');
 
 class LokiDriver extends BaseDriver {
   constructor(path) {
@@ -49,17 +48,12 @@ class LokiDriver extends BaseDriver {
       if (s.length > 0) auth = s[0].auth;
       if (auth && auth[ctx.userId]) userId = auth[ctx.userId];
 
-      const dataCollectionName = userId + '_data';
       const stateCollectionName = userId + '_state';
-      let data = this.db.getCollection(dataCollectionName);
-      if (data === null) {
-        data = this.db.addCollection(dataCollectionName);
-      }
       let state = this.db.getCollection(stateCollectionName);
       if (state === null) {
         state = this.db.addCollection(stateCollectionName);
       }
-      return { data, state, shared };
+      return { state, shared };
     } catch (err) {
       console.error(err);
     }
@@ -108,11 +102,6 @@ class LokiDriver extends BaseDriver {
 
   clearState(userData) {
     userData.state.clear();
-  }
-
-  fillDemoData(userData) {
-    userData.data.clear();
-    userData.data.insert(demoData);
   }
 
   storeAnswer(userData, question, answer) {

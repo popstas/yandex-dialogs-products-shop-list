@@ -1,5 +1,3 @@
-const deleteQuestion = require('./deleteQuestion');
-
 const listText = ctx => {
   return ctx.user.state.products.length > 0
     ? ctx.user.state.products.join(',\n')
@@ -68,11 +66,6 @@ module.exports = {
 
       if (notFound.length > 0) {
         text += (text ? '.\n' : '') + notInListText(notFound) + '.';
-
-        // если ничего не найдено, пробуем удалить из общей базы знаний
-        if (remove.length == 0) {
-          return deleteQuestion.handler(ctx);
-        }
       }
 
       text += '\n' + listTextShort(ctx);

@@ -12,12 +12,12 @@ services:
     # ports:
     #   - 27017:27017
 
-  yandex-dialogs-whatis:
-    image: popstas/yandex-dialogs-whatis:v3.6.5
+  yandex-dialogs-products-shop-list:
+    image: popstas/yandex-dialogs-products-shop-list:v3.6.5
     # build: .
     environment:
       NODE_ENV: production
     volumes:
       - $PWD/src/config.js:/app/src/config.js
     ports:
-      - 2756:3002
+      - 2758:3002
