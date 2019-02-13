@@ -12,7 +12,7 @@ services:
     # ports:
     #   - 27017:27017
 
-  yandex-dialogs-products-shop-list:
+  app:
     image: popstas/yandex-dialogs-products-shop-list:v3.6.5
     # build: .
     environment:
@@ -20,4 +20,4 @@ services:
     volumes:
       - $PWD/src/config.js:/app/src/config.js
     ports:
-      - 2758:3002
+      - 2758:3004
