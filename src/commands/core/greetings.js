@@ -11,7 +11,7 @@ module.exports = {
   async handler(ctx) {
     if (ctx.message != 'ping') ctx.logMessage(`> ${ctx.message} (welcome)`);
     let msg;
-    const buttons = ['авторизация', 'что нового', 'помощь', 'примеры', 'что ты знаешь', 'команды', 'список покупок'];
+    const buttons = ['список покупок', 'авторизация', 'что нового', 'помощь', 'примеры', 'что ты знаешь', 'команды'];
     if (ctx.user.state.visitor.visits > 1 || ctx.user.state.visit.messages > 1) {
       // TODO: разные приветствия
       msg =

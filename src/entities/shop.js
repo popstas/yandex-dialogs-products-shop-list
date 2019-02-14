@@ -104,6 +104,8 @@ module.exports = () => (ctx, next) => {
     'удалить',
     'убрать',
     'удаль',
+    'забыть',
+    'вычеркнуть',
     'показаться'
   ];
   if (shopWords.filter(word => infs.indexOf(word) != -1).length > 0 || knownMatcher(ctx)) {
@@ -120,7 +122,15 @@ module.exports = () => (ctx, next) => {
     ctx.entities.shop.action = 'add';
   }
 
-  const removeActionWords = ['удаль', 'удалить', 'убрать', 'стереть', 'вычеркнуть'];
+  const removeActionWords = [
+    'удаль',
+    'удалить',
+    'убрать',
+    'стереть',
+    'вычеркнуть',
+    'забыть',
+    'вычеркнуть'
+  ];
   if (removeActionWords.filter(word => infs.indexOf(word) != -1).length > 0) {
     ctx.entities.shop.action = 'remove';
   }
