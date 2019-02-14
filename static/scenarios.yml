@@ -7,7 +7,7 @@
   - ""
   - tests: [ { contains: Я умею } ]
   - Нет
-  - tests: [ { contains: помощь } ]
+  - tests: [ { contains: примеры } ]
 
   - ""
   - tests: [ { contains: Привет } ]
@@ -27,10 +27,6 @@
   - tests: [ { not_contains: Удален } ]
   - убери хлеб из списка
   - tests: [ { contains: теперь вы умеете пользоваться } ]
-
-"первая помощь":
-  - первая помощь
-  - tests: [ { contains: помощь } ]
 
 "спасибо":
   - спасибо
@@ -59,11 +55,11 @@
 
 "что ты умеешь":
   - что ты умеешь
-  - tests: [ { contains: Я умею } ]
+  - tests: [ { contains: примеры } ]
   - что ты можешь
-  - tests: [ { contains: Я умею } ]
+  - tests: [ { contains: примеры } ]
   - помощь
-  - tests: [ { contains: Я умею } ]
+  - tests: [ { contains: примеры } ]
 
 "тупая":
   - ты такая тупая

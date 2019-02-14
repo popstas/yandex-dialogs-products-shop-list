@@ -25,7 +25,7 @@ module.exports = {
         'Я умею запоминать что где лежит или вести список покупок.',
         'Хотите ознакомиться с возможностями на примере?'
       ];
-      return ctx.confirm(msg, help.tour.handler, help.first.handler);
+      return ctx.confirm(msg, help.tour.handler, help.help.handler);
     }
   }
 };

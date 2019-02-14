@@ -22,7 +22,7 @@ cd node_modules/ && git clone https://github.com/fletcherist/yandex-dialogs-sdk.
 ```
 mongo --port 27017
 # in mongo shell
-db.auth({user: 'yandex-dialogs-products-shop-list', pwd: 'mypassword'})
+db.auth({user: 'root', pwd: 'mypassword'})
 use yandex-dialogs-products-shop-list
 db.createUser({ user: 'yandex-dialogs-products-shop-list', pwd: 'mypassword', roles: [ { role: 'readWrite', db: 'yandex-dialogs-products-shop-list' } ] })
 ```

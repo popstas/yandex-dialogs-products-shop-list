@@ -43,7 +43,6 @@ class YandexDialogsWhatis {
     commands.utils.useCommands(alice, commands.core);
     commands.utils.useCommands(alice, commands.items);
     commands.utils.useCommands(alice, commands.help);
-    commands.utils.useCommands(alice, commands.help.items);
 
     alice.any(commands.core.any.handler);
   }
