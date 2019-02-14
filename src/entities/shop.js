@@ -1,4 +1,5 @@
 const Az = require('az');
+const matchers = require('../matchers');
 
 const postPairs = ['NOUN PROP NOUN', 'ADJF NOUN', 'NOUN'];
 
@@ -78,6 +79,15 @@ module.exports = () => (ctx, next) => {
     }
   }
 
+  const knownMatcher = matchers.strings([
+    'что ты знаешь',
+    'что ты помнишь',
+    'ты знаешь',
+    'что ты запомнила',
+    'что ты поняла',
+    'что ты хочешь'
+  ]);
+
   // пересечение массивов на магазинные слова
   const shopWords = [
     'магазин',
@@ -96,7 +106,7 @@ module.exports = () => (ctx, next) => {
     'удаль',
     'показаться'
   ];
-  if (shopWords.filter(word => infs.indexOf(word) != -1).length > 0) {
+  if (shopWords.filter(word => infs.indexOf(word) != -1).length > 0 || knownMatcher(ctx)) {
     ctx.entities.shop.action = 'list';
   }
 
