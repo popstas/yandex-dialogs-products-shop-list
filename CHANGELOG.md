@@ -1,3 +1,14 @@
+## [3.7.3](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.2...v3.7.3) (2019-02-14)
+
+
+### Bug Fixes
+
+* домой, стоп, забудь хлеб, конечно, класс ([9e93f43](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/9e93f43))
+* ладно пока, спасибо умничка, например ([803af5c](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/803af5c))
+* ругательства, глухая, все пока, все спасибо, пример, удали все, сотри его ([54e9427](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/54e9427))
+
+
+
 ## [3.7.2](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.1...v3.7.2) (2019-02-14)
 
 

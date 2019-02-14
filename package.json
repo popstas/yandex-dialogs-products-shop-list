@@ -1,6 +1,6 @@
 {
   "name": "yandex-dialogs-products-shop-list",
-  "version": "3.7.2",
+  "version": "3.7.3",
   "description": "Навык Мой список покупок для Алисы",
   "main": "src/server.js",
   "scripts": {
