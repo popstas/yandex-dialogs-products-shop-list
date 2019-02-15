@@ -1,3 +1,12 @@
+## [3.7.4](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.3...v3.7.4) (2019-02-15)
+
+
+### Features
+
+* 1 помощь ([1cfd1dd](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/1cfd1dd))
+
+
+
 ## [3.7.3](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.2...v3.7.3) (2019-02-14)
 
 
