@@ -12,6 +12,14 @@
   - ""
   - tests: [ { contains: Привет } ]
 
+"1 помощь":
+  - привет
+  - Привет
+  - 1 помощь
+  - tests: [ { contains: Я умею } ]
+  - нет
+  - tests: [ { contains: '' } ]
+
 "ping":
   - ping
   - tests: [ { contains: "" } ] # хак, принимает любой ответ
