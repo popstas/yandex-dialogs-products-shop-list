@@ -39,6 +39,17 @@ const plusMinusParse = ctx => {
   return actions;
 };
 
+const isProduct = msg => {
+  const w = msg.split(' ');
+  const p = w.map(w => {
+    const morph = Az.Morph(w);
+    return (post = morph.length > 0 ? morph[0].tag.POST : '');
+  });
+
+  const postStr = p.join(' ');
+  return postPairs.includes(postStr);
+}
+
 // распознает список покупок
 module.exports = () => (ctx, next) => {
   ctx.entities = ctx.entities || {};
@@ -112,6 +123,10 @@ module.exports = () => (ctx, next) => {
     ctx.entities.shop.action = 'list';
   }
 
+  if (!ctx.entities.shop.action && isProduct(ctx.message)) {
+    ctx.entities.shop.action = 'addConfirm';
+  }
+
   if (!ctx.entities.shop.action) return next(ctx);
 
   const addActionWords = ['добавить', 'купить', 'запомнить'];
@@ -159,8 +174,6 @@ module.exports = () => (ctx, next) => {
     const productsPostsString = productsPosts.join(' ');
 
     const productsCombos = [];
-
-    const comboIndexes = [];
 
     let i = 0;
     while (i < products.length) {

@@ -32,6 +32,29 @@ module.exports = {
 
     let list = ctx.user.state.products;
 
+    // добавить с подтверждением
+    if (opts.action == 'addConfirm') {
+      const add = opts.products.filter(product => product && list.indexOf(product) == -1);
+      
+      if(add.length == 0){
+        return ctx.reply('В списке уже есть ' + ctx.az.andList(opts.products) + '.');
+      }
+
+      return ctx.confirm('Хотите добавить ' + ctx.az.andList(opts.products) + '?', async ctx => {
+        ctx.entities.shop.productsAdded = add; // для удали последнее
+        ctx.user.state.products = [...list, ...add].filter(Boolean);
+        text =
+          add.length > 0
+            ? 'Добавлены: ' + ctx.az.andList(add) + '.'
+            : 'В списке уже есть ' + ctx.az.andList(opts.products) + '.';
+        if (add.length < ctx.user.state.products.length) text += '\n' + listTextShort(ctx);
+        return await ctx.reply(text, []);
+      },
+      ctx => ctx.replyRandom(['Как хотите', 'Ладно', 'ОК', 'Поняла', 'ОК']),
+      {optional: true}
+      );
+    }
+    
     // добавить
     if (opts.action == 'add') {
       const add = opts.products.filter(product => product && list.indexOf(product) == -1);
