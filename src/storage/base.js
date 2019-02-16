@@ -16,9 +16,7 @@ class BaseDriver {
 
   getState(userData) {}
 
-  clearData(userData) {}
-
-  storeAnswer(userData, question, answer) {}
+  setState(userData, state) {}
 }
 
 module.exports = BaseDriver;

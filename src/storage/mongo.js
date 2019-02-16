@@ -14,16 +14,13 @@ class MongoDriver extends BaseDriver {
   }
 
   connect() {
-    return MongoClient.connect(
-      this.url,
-      {
-        useNewUrlParser: true,
-        auth: {
-          user: this.user,
-          password: this.password
-        }
+    return MongoClient.connect(this.url, {
+      useNewUrlParser: true,
+      auth: {
+        user: this.user,
+        password: this.password
       }
-    );
+    });
   }
 
   getUserData(ctx) {
@@ -42,12 +39,19 @@ class MongoDriver extends BaseDriver {
 
       try {
         const sharedCollectionName = 'shared';
+        const usersCollectionName = 'users';
         let userId = ctx.userId;
 
-        // shared database
+        // shared collection
         let shared = await this.db.collection(sharedCollectionName);
         if (shared === null) {
           shared = await this.db.createCollection(sharedCollectionName);
+        }
+
+        // users collection
+        let users = await this.db.collection(usersCollectionName);
+        if (users === null) {
+          users = await this.db.createCollection(usersCollectionName);
         }
 
         // foreign userId
@@ -56,17 +60,11 @@ class MongoDriver extends BaseDriver {
         if (s.length > 0) auth = s[0].shared.auth;
         if (auth && auth[ctx.userId]) userId = auth[ctx.userId];
 
-        const dataCollectionName = userId + '_data';
-        const stateCollectionName = userId + '_state';
-        let data = await this.db.collection(dataCollectionName);
-        if (data === null) {
-          data = await this.db.createCollection(dataCollectionName);
-        }
-        let state = await this.db.collection(stateCollectionName);
-        if (state === null) {
-          state = await this.db.createCollection(stateCollectionName);
-        }
-        resolve({ data, state, shared });
+        let state = { userId };
+        const stateRes = await users.find({ userId: userId }).toArray();
+        if (stateRes.length > 0) state = stateRes[0].state;
+
+        resolve({ state, users, shared });
       } catch (err) {
         reject(err);
       }
@@ -74,9 +72,8 @@ class MongoDriver extends BaseDriver {
   }
 
   async getState(userData) {
-    let state = await userData.state.find({ name: 'state' }).toArray();
-    state = state.length > 0 ? state[0].state : {};
-    delete(state.error);
+    let state = userData.state || {};
+    delete state.error;
     return state;
   }
 
@@ -88,8 +85,8 @@ class MongoDriver extends BaseDriver {
   }
 
   async setState(userData, state) {
-    const result = await userData.state.updateOne(
-      { name: 'state' },
+    const result = await userData.users.updateOne(
+      { userId: state.userId },
       { $set: { state } },
       { upsert: true }
     );
@@ -103,25 +100,8 @@ class MongoDriver extends BaseDriver {
     );
   }
 
-  async clearData(userData) {
-    await userData.data.deleteMany({});
-  }
-
   async clearState(userData) {
     await userData.state.deleteMany({});
-  }
-
-  async storeAnswer(userData, question, answer) {
-    const result = await userData.data.updateOne(
-      { questions: question },
-      { $set: { answer }, $setOnInsert: { questions: [question] } },
-      { upsert: true }
-    );
-  }
-
-  async removeQuestion(userData, question) {
-    const result = await userData.data.deleteOne({ questions: question });
-    return result.deletedCount == 1;
   }
 }
 

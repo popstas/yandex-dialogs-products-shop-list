@@ -34,12 +34,19 @@ class LokiDriver extends BaseDriver {
 
     try {
       const sharedCollectionName = 'shared';
+      const usersCollectionName = 'users';
       let userId = ctx.userId;
 
-      // shared database
+      // shared collection
       let shared = this.db.getCollection(sharedCollectionName);
       if (shared === null) {
         shared = this.db.addCollection(sharedCollectionName);
+      }
+
+      // users collection
+      let users = this.db.getCollection(usersCollectionName);
+      if (users === null) {
+        users = this.db.addCollection(usersCollectionName);
       }
 
       // foreign userId
@@ -48,23 +55,17 @@ class LokiDriver extends BaseDriver {
       if (s.length > 0) auth = s[0].auth;
       if (auth && auth[ctx.userId]) userId = auth[ctx.userId];
 
-      const stateCollectionName = userId + '_state';
-      let state = this.db.getCollection(stateCollectionName);
-      if (state === null) {
-        state = this.db.addCollection(stateCollectionName);
-      }
-      return { state, shared };
+      let state = { userId };
+      const stateRes = users.find({ userId: userId });
+      if (stateRes.length > 0) state = stateRes[0];
+      return { users, state, shared };
     } catch (err) {
       console.error(err);
     }
   }
 
-  getData(userData) {
-    return userData.data.data;
-  }
-
   getState(userData) {
-    return userData.state.data[0] || {};
+    return userData.state || {};
   }
 
   getShared(userData) {
@@ -72,18 +73,11 @@ class LokiDriver extends BaseDriver {
   }
 
   setState(userData, state) {
-    /* const found = userData.state.data['state'];
-    if (found) {
-      found = state;
-      userData.state.update(found);
+    const found = userData.users.find({ userId: state.userId });
+    if (found.length > 0) {
+      userData.users.update(state);
     } else {
-      userData.state.insert({ state });
-    } */
-    // userData.state.clear();
-    if (userData.state.data.length == 0) {
-      userData.state.insert(state);
-    } else {
-      userData.state.update(state);
+      userData.users.insert(state);
     }
   }
 
@@ -95,36 +89,10 @@ class LokiDriver extends BaseDriver {
     }
   }
 
-  clearData(userData) {
-    if (userData.data.data.length == 0) return;
-    userData.data.clear();
-  }
-
   clearState(userData) {
     userData.state.clear();
   }
 
-  storeAnswer(userData, question, answer) {
-    const found = userData.data.data.find(item => item.questions.indexOf(question) != -1);
-    if (found) {
-      found.answer = answer;
-      userData.data.update(found);
-    } else {
-      userData.data.insert({
-        questions: [question],
-        answer: answer
-      });
-    }
-  }
-
-  async removeQuestion(userData, question) {
-    const found = userData.data.data.find(item => item.questions.indexOf(question) != -1);
-    if (found) {
-      userData.data.remove(found);
-      return true;
-    }
-    return false;
-  }
 }
 
 module.exports = LokiDriver;

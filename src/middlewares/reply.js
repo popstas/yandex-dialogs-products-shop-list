@@ -31,6 +31,7 @@ const onShutdown = async (ctx, reply) => {
 
   // store state
   if (!ctx.user.state.error){
+    delete ctx.user.state.state;
     await storage.setState(ctx.userData, ctx.user.state);
     await storage.setShared(ctx.userData, ctx.user.shared);
   }
