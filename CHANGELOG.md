@@ -1,3 +1,17 @@
+# [3.8.0](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.7...v3.8.0) (2019-02-16)
+
+
+### Bug Fixes
+
+* удали список ([cd522b1](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/cd522b1))
+
+
+### Features
+
+* убираются единицы изменения, типа "2 пакета", "1 килограмм" ([5a11f00](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/5a11f00))
+
+
+
 ## [3.7.7](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.6...v3.7.7) (2019-02-16)
 
 
