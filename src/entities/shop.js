@@ -48,7 +48,7 @@ const isProduct = msg => {
 
   const postStr = p.join(' ');
   return postPairs.includes(postStr);
-}
+};
 
 // распознает список покупок
 module.exports = () => (ctx, next) => {
@@ -105,6 +105,8 @@ module.exports = () => (ctx, next) => {
     'магазины',
     'покупка',
     'покупки',
+    'продукт',
+    'продукты',
     'список',
     'списки',
     'купить',
@@ -205,8 +207,9 @@ module.exports = () => (ctx, next) => {
     }
 
     ctx.entities.shop.products = productsCombos.filter(Boolean);
-    if (ctx.entities.shop.products.length == 0 && ctx.entities.shop.action != 'clear') {
-      ctx.entities.shop.action = 'listAny'; // если не нашлось продуктов
+    if (ctx.entities.shop.products.length == 0) {
+      if (ctx.entities.shop.action == 'remove') ctx.entities.shop.action = 'clear'; // удали список
+      if (ctx.entities.shop.action != 'clear') ctx.entities.shop.action = 'listAny';
     }
   }
 
