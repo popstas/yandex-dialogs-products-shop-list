@@ -121,7 +121,15 @@ module.exports = () => (ctx, next) => {
     'вычеркнуть',
     'показаться',
 
-    'какие' // какие покупки
+    'какие', // какие покупки
+
+    'пакет',
+    'мешок',
+    'пачка',
+    'штука',
+    'упаковка',
+    'килограмм',
+    'грамм',
   ];
   if (shopWords.filter(word => infs.indexOf(word) != -1).length > 0 || knownMatcher(ctx)) {
     ctx.entities.shop.action = 'list';
