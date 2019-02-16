@@ -117,7 +117,9 @@ module.exports = () => (ctx, next) => {
     'удаль',
     'забыть',
     'вычеркнуть',
-    'показаться'
+    'показаться',
+
+    'какие' // какие покупки
   ];
   if (shopWords.filter(word => infs.indexOf(word) != -1).length > 0 || knownMatcher(ctx)) {
     ctx.entities.shop.action = 'list';
