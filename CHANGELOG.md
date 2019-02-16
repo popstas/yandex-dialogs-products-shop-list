@@ -1,3 +1,12 @@
+## [3.7.6](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.5...v3.7.6) (2019-02-16)
+
+
+### Features
+
+* пауза ([fe86130](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/fe86130))
+
+
+
 ## [3.7.5](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.7.4...v3.7.5) (2019-02-16)
 
 
