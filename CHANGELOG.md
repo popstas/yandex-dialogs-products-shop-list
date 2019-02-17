@@ -1,3 +1,12 @@
+## [3.9.1](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.9.0...v3.9.1) (2019-02-17)
+
+
+### Bug Fixes
+
+* иногда связки устройств shared.auth не могли создаться ([b4fed17](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/b4fed17))
+
+
+
 # [3.9.0](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.8.0...v3.9.0) (2019-02-16)
 
 
