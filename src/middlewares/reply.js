@@ -29,8 +29,14 @@ const onShutdown = async (ctx, reply) => {
     reply: reply
   };
 
+  // действия запоминаются отдельно, чтобы дальше, чем на сообщение работало
+  if (['add', 'remove', 'clear', 'revert'].includes(ctx.entities.shop.action)) {
+    ctx.user.state.lastShopAction = ctx.entities.shop;
+  }
+  if (!ctx.user.state.lastShopAction) ctx.user.state.lastShopAction = {}; // чтобы не было ошибок
+
   // store state
-  if (!ctx.user.state.error){
+  if (!ctx.user.state.error) {
     delete ctx.user.state.state;
     await storage.setState(ctx.userData, ctx.user.state);
     await storage.setShared(ctx.userData, ctx.user.shared);
