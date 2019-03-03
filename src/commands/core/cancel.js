@@ -3,10 +3,10 @@ const utils = require('../../utils');
 
 module.exports = {
   intent: 'cancel',
-  matcher: /^(отмена|стоп)/i,
+  matcher: /^(стоп)/i,
 
   async handler(ctx) {
     ctx.chatbase.setNotHandled();
-    return ctx.reply('Всё отменено');
+    return ctx.reply('Всё отменено, чтобы выйти, скажите "Хватит"');
   }
 };

@@ -1,9 +1,9 @@
 module.exports = {
   intent: 'deleteLast',
-  matcher: /^(забудь|удали(ть)?|убрать|убери|сотри|стереть|отмени(ть)?) ?(последнее|последний|последние|последнюю запись|это|его)?$/i,
+  matcher: /^(забудь|удали(ть)?|убрать|убери|сотри|стереть|отмени(ть)?|отмена|не то|неправильно|не так) ?(последн(ее|ий|ие|их))? ?(запись|это|его|удаление|очистку|изменени(е|я|й)|добавление)?$/i,
 
   async handler(ctx) {
-    const lastMessageShopAction = ctx.user.state.lastRequest.entities.shop.action;
+    const lastMessageShopAction = ctx.user.state.lastRequest && ctx.user.state.lastRequest.entities.shop.action || '';
     const lastShopAction =
       (ctx.user.state.lastShopAction && ctx.user.state.lastShopAction.action) || '';
 
