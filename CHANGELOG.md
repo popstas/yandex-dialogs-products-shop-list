@@ -1,3 +1,13 @@
+## [3.10.2](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.10.1...v3.10.2) (2019-03-03)
+
+
+### Bug Fixes
+
+* верни ([c76ab65](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/c76ab65))
+* верни назад|верни как было ([50f3693](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/50f3693))
+
+
+
 ## [3.10.1](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.10.0...v3.10.1) (2019-03-03)
 
 
