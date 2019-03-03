@@ -1,3 +1,12 @@
+# [3.10.0](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.9.1...v3.10.0) (2019-03-03)
+
+
+### Features
+
+* отмена последнего действия со списком ([2d03a89](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/2d03a89))
+
+
+
 ## [3.9.1](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.9.0...v3.9.1) (2019-02-17)
 
 
