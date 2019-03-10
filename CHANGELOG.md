@@ -1,3 +1,7 @@
+## [3.11.1](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.11.0...v3.11.1) (2019-03-10)
+
+
+
 # [3.11.0](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.10.2...v3.11.0) (2019-03-10)
 
 

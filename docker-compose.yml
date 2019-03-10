@@ -13,7 +13,7 @@ services:
       - 27017:27017
 
   app:
-    image: popstas/yandex-dialogs-products-shop-list:v3.11.0
+    image: popstas/yandex-dialogs-products-shop-list:v3.11.1
     # build: .
     environment:
       NODE_ENV: production
