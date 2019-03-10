@@ -1,3 +1,18 @@
+# [3.11.0](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.10.2...v3.11.0) (2019-03-10)
+
+
+### Bug Fixes
+
+* правки после чтения истории второй памяти ([fba9788](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/fba9788))
+
+
+### Features
+
+* оценить навык ([53b128d](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/53b128d))
+* я купил ([5a4fd59](https://github.com/popstas/yandex-dialogs-products-shop-list/commit/5a4fd59))
+
+
+
 ## [3.10.2](https://github.com/popstas/yandex-dialogs-products-shop-list/compare/v3.10.1...v3.10.2) (2019-03-03)
 
 
