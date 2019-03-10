@@ -14,6 +14,12 @@ module.exports = {
       'Пожалуйста',
       'Пожалуйста',
       'Пожалуйста'
+    ], [
+      {
+        title: 'оценить навык',
+        url: 'https://dialogs.yandex.ru/store/skills/cc4b9921-vkusnyj-spisok',
+        hide: true
+      }
     ]);
   }
 };

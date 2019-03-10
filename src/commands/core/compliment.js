@@ -17,7 +17,8 @@ module.exports = {
     'правильно молодец',
     'класс',
     'спасибо умничка',
-    'прикольно'
+    'прикольно',
+    'оценить навык'
   ],
 
   handler(ctx) {
@@ -31,6 +32,12 @@ module.exports = {
       'Спасибо!',
       'Спасибо!',
       'Спасибо!'
+    ], [
+      {
+        title: 'оценить навык',
+        url: 'https://dialogs.yandex.ru/store/skills/cc4b9921-vkusnyj-spisok',
+        hide: true
+      }
     ]);
   }
 };
