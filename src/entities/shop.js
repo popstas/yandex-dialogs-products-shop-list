@@ -54,6 +54,8 @@ const isProduct = msg => {
 module.exports = () => (ctx, next) => {
   ctx.entities = ctx.entities || {};
 
+  const isBought = ctx.message.match(/я( уже)? купила?/);
+
   const words = ctx.message.split(' ');
 
   // слова в начальных формах, сохраняется число у сущ. и прил.
@@ -142,7 +144,7 @@ module.exports = () => (ctx, next) => {
   if (!ctx.entities.shop.action) return next(ctx);
 
   const addActionWords = ['добавить', 'купить', 'запомнить'];
-  if (
+  if (!isBought &&
     !ctx.message.match(/^что /i) &&
     addActionWords.filter(word => infs.indexOf(word) != -1).length > 0
   ) {
@@ -158,7 +160,7 @@ module.exports = () => (ctx, next) => {
     'забыть',
     'вычеркнуть'
   ];
-  if (removeActionWords.filter(word => infs.indexOf(word) != -1).length > 0) {
+  if (isBought || removeActionWords.filter(word => infs.indexOf(word) != -1).length > 0) {
     ctx.entities.shop.action = 'remove';
   }
 
